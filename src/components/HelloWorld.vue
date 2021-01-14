@@ -29,12 +29,20 @@
     </ul>
   </div>
 </template>
-
 <script>
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  created() {
+      this.$axios.get('http://localhost:8081/performers')
+      .then((resp) => {
+        console.log(resp.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 }
 </script>

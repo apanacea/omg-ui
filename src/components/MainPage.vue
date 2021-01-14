@@ -5,23 +5,28 @@
       <a-menu
         theme="dark"
         mode="horizontal"
-        :defaultSelectedKeys="['1']"
+        :default-selected-keys="['2']"
         :style="{ lineHeight: '64px' }"
       >
-        <a-menu-item key="1" @click="onSelect('films')">
-          影片
+        <a-menu-item key="1">
+          nav 1
         </a-menu-item>
-        <a-menu-item key="2" @click="onSelect('performers')">
-          演员
+        <a-menu-item key="2">
+          nav 2
         </a-menu-item>
-        <a-menu-item key="3" @click="onSelect('performer')">
-          标签
+        <a-menu-item key="3">
+          nav 3
         </a-menu-item>
       </a-menu>
     </a-layout-header>
-    <a-layout-content style="padding: 50px">
+    <a-layout-content style="padding: 0 50px">
+      <a-breadcrumb style="margin: 16px 0">
+        <a-breadcrumb-item>Home</a-breadcrumb-item>
+        <a-breadcrumb-item>List</a-breadcrumb-item>
+        <a-breadcrumb-item>App</a-breadcrumb-item>
+      </a-breadcrumb>
       <div :style="{ background: '#fff', padding: '24px', minHeight: '280px' }">
-        <router-view></router-view>
+        Content
       </div>
     </a-layout-content>
     <a-layout-footer style="text-align: center">
@@ -38,23 +43,13 @@
   float: left;
 }
 </style>
-
-
 <script>
 export default {
-  name: 'App',
-  components: {
-  
-  },
+  name: 'MainPage',
+
   data() {
     return {
-      selectedKeys: ['1']
-    }
-  },
-  methods: {
-    onSelect(s) {
-      this.$router.push(s)
     }
   }
-}
+};
 </script>
