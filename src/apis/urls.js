@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:8081/api'
+// const baseUrl = 'http://localhost:8081/api'
+const baseUrl = 'http://62.234.10.88:8081/api'
 
 export default {
     // 图片列表
@@ -11,5 +12,12 @@ export default {
     // 删除演员
     deletePerformer: baseUrl + '/performer/',
 
-    selectFilms: baseUrl + '/films'
+    selectFilms: baseUrl + '/films',
+
+    // 查询演员列表
+    selectTags: baseUrl + '/tags',
+    // 添加演员
+    createTag: baseUrl + '/tag',
+    // 删除演员
+    deleteTag: baseUrl + '/tag/',
 }

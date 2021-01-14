@@ -42,7 +42,7 @@ export default {
     // PerformerDrawer
   },
   created() {
-    this.$axios.get('http://localhost:8081/api/tags')
+    this.$axios.get(this.$urls.selectTags)
         .then((resp) => {
           console.log(resp.data);
           this.dataSource = resp.data
@@ -80,7 +80,7 @@ export default {
     onDelete(id) {
       console.log(id);
       this.$axios({
-        url: 'http://localhost:8081/api/tag/' + id,
+        url: this.$urls.deleteTag + id,
         method: 'delete',
         headers: {
           'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ export default {
           })
     },
     flashTable() {
-      this.$axios.get('http://localhost:8081/api/performers')
+      this.$axios.get(this.$urls.selectTags)
           .then((resp) => {
             console.log('刷新页面');
             console.log(resp.data);

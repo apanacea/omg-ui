@@ -4,7 +4,7 @@
     list-type="picture-card"
     class="avatar-uploader"
     :show-upload-list="false"
-    action="http://localhost:8081/api/upload/performerAvatar"
+    action="http://62.234.10.88:8081/api/upload/performerAvatar"
     :before-upload="beforeUpload"
     @change="handleChange"
   >

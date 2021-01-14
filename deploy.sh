@@ -1,2 +1,2 @@
 npm run build;
-sudo cp -r dist/ /var/www
+cp -r dist/ /var/www

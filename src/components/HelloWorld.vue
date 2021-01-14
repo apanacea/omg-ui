@@ -36,7 +36,7 @@ export default {
     msg: String
   },
   created() {
-      this.$axios.get('http://localhost:8081/performers')
+      this.$axios.get(this.$urls.createPerformer)
       .then((resp) => {
         console.log(resp.data)
       })
