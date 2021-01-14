@@ -1,7 +1,7 @@
 <template>
   <a-select
     show-search
-    placeholder="Select a person"
+    placeholder="添加一个标签"
     option-filter-prop="children"
     style="width: 200px"
     :filter-option="filterOption"

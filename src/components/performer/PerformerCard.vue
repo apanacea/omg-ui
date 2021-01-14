@@ -16,7 +16,7 @@
 
 <script>
 export default {
-    name: 'FilmCard',
+    name: 'PerformerCard',
     components: {
   },
   props: {

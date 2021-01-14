@@ -1,12 +1,12 @@
 <template>
   <a-layout id="components-layout-demo-top" class="layout">
     <a-layout-header>
-      <div class="logo" />
+      <div class="logo"/>
       <a-menu
-        theme="dark"
-        mode="horizontal"
-        :defaultSelectedKeys="['1']"
-        :style="{ lineHeight: '64px' }"
+          theme="dark"
+          mode="horizontal"
+          :defaultSelectedKeys="['1']"
+          :style="{ lineHeight: '64px' }"
       >
         <a-menu-item key="1" @click="onSelect('films')">
           影片
@@ -14,9 +14,19 @@
         <a-menu-item key="2" @click="onSelect('performers')">
           演员
         </a-menu-item>
-        <a-menu-item key="3" @click="onSelect('performer')">
-          标签
-        </a-menu-item>
+        <a-sub-menu>
+        <span slot="title" class="submenu-title-wrapper">
+          <a-icon type="setting"/> 后台管理 </span>
+          <a-menu-item key="setting:1">
+            影片管理
+          </a-menu-item>
+          <a-menu-item key="setting:2" @click="onSelect('performerManage')">
+            演员管理
+          </a-menu-item>
+          <a-menu-item key="setting:3" @click="onSelect('tagManage')">
+            标签管理
+          </a-menu-item>
+        </a-sub-menu>
       </a-menu>
     </a-layout-header>
     <a-layout-content style="padding: 50px">
@@ -43,9 +53,7 @@
 <script>
 export default {
   name: 'App',
-  components: {
-  
-  },
+  components: {},
   data() {
     return {
       selectedKeys: ['1']
