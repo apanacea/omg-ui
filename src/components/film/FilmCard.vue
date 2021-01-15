@@ -1,15 +1,15 @@
 <template>
-  <a-card bordered=false hoverable=true style="width: 300px">
+  <a-card bordered=false hoverable=true body-style="padding: 12px">
     <img
         slot="cover"
         alt="example"
-
-        src="https://justneo-omg.oss-cn-beijing.aliyuncs.com/film-cover/e1fe9925bc315c60096602538fb1cb134854779e.jpeg"
+        src="https://justneo-omg.oss-cn-beijing.aliyuncs.com/film-cover/236d19d765856988753fec9e11274951.jpeg"
     />
-    <a-card-meta :title="serialNumber">
-
+    <a-card-meta>
       <template slot="description">
-        {{ title }}
+        <h2 style="margin: 0">{{serialNumber}}</h2>
+        <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 0">{{ title }}</p>
+        <a-tag v-for="tag in tags" :key="tag.id"> {{tag.name()}} </a-tag>
       </template>
     </a-card-meta>
   </a-card>
@@ -25,7 +25,9 @@ export default {
     titleZh: String,
     releaseDate: String,
     level: String,
-    coverSrc: String
+    coverSrc: String,
+    performers: Object,
+    tags: Object,
   },
   data() {
     return {};
