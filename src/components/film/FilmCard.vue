@@ -3,7 +3,7 @@
     <img
         slot="cover"
         alt="example"
-        src="https://justneo-omg.oss-cn-beijing.aliyuncs.com/film-cover/236d19d765856988753fec9e11274951.jpeg"
+        :src="coverUrl"
     />
     <a-card-meta>
       <template slot="description">
@@ -25,7 +25,7 @@ export default {
     titleZh: String,
     releaseDate: String,
     level: String,
-    coverSrc: String,
+    coverUrl: String,
     performers: Object,
     tags: Object,
   },

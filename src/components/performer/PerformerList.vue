@@ -8,7 +8,7 @@
     <TagSelect style="padding: 24px 0 24px 0"/>
     <a-list :grid="{ gutter: 24, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 8 }" :data-source="performers">
       <a-list-item slot="renderItem" slot-scope="item">
-        <PerformerCard :name="item.nameZh" :avatarSrc="item.avatarSrc"/>
+        <PerformerCard :name="item.name" :avatarUrl="item.avatarUrl"/>
       </a-list-item>
     </a-list>
     <a-pagination show-quick-jumper pageSize="20" :default-current="pageNum" :total="totalElements" @change="onChange"/>

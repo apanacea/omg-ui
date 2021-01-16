@@ -17,23 +17,16 @@
         </a-row>
         <a-row :gutter="16">
           <a-col :span="8">
-            <a-form-item label="中文名">
+            <a-form-item label="名字">
               <a-input v-model="performer.nameZh"
                        placeholder="必填"
               />
             </a-form-item>
           </a-col>
           <a-col :span="8">
-            <a-form-item label="日文名">
+            <a-form-item label="中文名">
               <a-input v-model="performer.nameJa"
                        placeholder="可选"
-              />
-            </a-form-item>
-          </a-col>
-          <a-col :span="8">
-            <a-form-item label="英文名">
-              <a-input v-model="performer.nameEn"
-                       placeholder="选填"
               />
             </a-form-item>
           </a-col>
@@ -42,6 +35,7 @@
           <a-col :span="24">
             <a-form-item label="头像链接">
               <a-input v-model="performer.avatarSrc"
+                       :disabled="true"
                        placeholder="选填"
               />
             </a-form-item>
@@ -67,8 +61,19 @@
           </a-col>
         </a-row>
         <a-row :gutter="16">
+          <a-col :span="12">
+            <a-form-item label="生日">
+              <a-date-picker placeholder="可选" @change="onChange" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item label="出道日期">
+              <a-date-picker placeholder="可选" @change="onChange" />
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row :gutter="16">
           <a-col :span="24">
-
             <a-form-item label="标签">
               <TagSelect/>
             </a-form-item>

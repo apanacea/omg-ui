@@ -6,12 +6,12 @@
         sub-title="添加或修改已有的演员信息"
     />
     <PerformerDrawer style="padding-bottom: 24px; padding-top: 24px"/>
-    <a-table bordered :data-source="dataSource" :columns="columns">
+    <a-table bordered :data-source="performers" :columns="columns" :pagination="false" style="padding-bottom: 24px">
       <template slot="operation" slot-scope="text, record">
         <a-space>
           <PerformerDrawer/>
           <a-popconfirm
-              v-if="dataSource.length"
+              v-if="performers.length"
               title="确定要删除吗?"
               @confirm="() => onDelete(record.id)"
           >
@@ -24,6 +24,7 @@
 
       </template>
     </a-table>
+    <a-pagination show-quick-jumper :pageSize="20" :default-current="pageNum" :total="totalElements" @change="onChange"/>
   </div>
 </template>
 
@@ -39,7 +40,8 @@ export default {
     this.$axios.get(this.$urls.selectPerformers)
         .then((resp) => {
           console.log(resp.data);
-          this.dataSource = resp.data
+          this.performers = resp.data.list
+          this.totalElements = resp.data.totalElements
         })
         .catch((error) => {
           console.log(error)
@@ -47,13 +49,10 @@ export default {
   },
   data() {
     return {
-      dataSource: [],
-      count: 0,
+      performers: [],
+      pageNum: 1,
+      totalElements: 0,
       columns: [
-        // {
-        //   title: 'id',
-        //   dataIndex: 'id',
-        // },
         {
           title: '中文名',
           dataIndex: 'nameZh',
@@ -93,6 +92,9 @@ export default {
     };
   },
   methods: {
+    showDrawer() {
+      this.visible = true;
+    },
     onDelete(id) {
       console.log(id);
       this.$axios({
@@ -115,7 +117,8 @@ export default {
           .then((resp) => {
             console.log('刷新页面');
             console.log(resp.data);
-            this.dataSource = resp.data
+            this.dataSource = resp.data.list
+            this.totalElements = resp.data.totalElements
           })
           .catch((error) => {
             console.log(error)

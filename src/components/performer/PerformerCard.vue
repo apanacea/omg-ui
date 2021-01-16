@@ -1,14 +1,14 @@
 <template>
   <a-card bordered=false hoverable=true style="width: 200px">
-    <img
+    <img v-if="avatarUrl !== ''"
         slot="cover"
         alt="example"
         style="width: 100%; height: 200px"
-        :src="avatarSrc"
+        :src="avatarUrl === '' ? avatarUrl : 'https://justneo-omg.oss-cn-beijing.aliyuncs.com/performer-avatar/3df471bd3d88e1120ea2b0363981424b.jpeg'"
     />
-    <a-card-meta :title="name">
+    <a-card-meta>
       <template slot="description">
-        www.instagram.com
+        <h1 style="margin: 0"> {{ name }} </h1>
       </template>
     </a-card-meta>
   </a-card>
@@ -20,7 +20,7 @@ export default {
   components: {},
   props: {
     name: String,
-    avatarSrc: String
+    avatarUrl: String
   },
   data() {
     return {};
