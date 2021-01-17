@@ -6,28 +6,28 @@
         sub-title=""
     />
     <a-space>
-      <a-select
-          show-search
-          placeholder="Select a person"
-          option-filter-prop="children"
-          style="width: 250px; padding: 24px 0 24px 0"
-          @change="onTagSelectChange"
-      >
-        <a-select-option v-for="item in this.optionalSeries" :key="item" :value="item.name">
-          {{ item.name }}
-        </a-select-option>
-      </a-select>
-      <a-select
-          show-search
-          placeholder="Select a person"
-          option-filter-prop="children"
-          style="width: 150px; padding: 24px 0 24px 0"
-          @change="onTagSelectChange"
-      >
-        <a-select-option v-for="item in this.optionalTags" :key="item" :value="item.name">
-          {{ item.name }}
-        </a-select-option>
-      </a-select>
+<!--      <a-select-->
+<!--          show-search-->
+<!--          placeholder="Select a person"-->
+<!--          option-filter-prop="children"-->
+<!--          style="width: 250px; padding: 24px 0 24px 0"-->
+<!--          @change="onTagSelectChange"-->
+<!--      >-->
+<!--        <a-select-option v-for="item in this.optionalSeries" :key="item" :value="item.name">-->
+<!--          {{ item.name }}-->
+<!--        </a-select-option>-->
+<!--      </a-select>-->
+<!--      <a-select-->
+<!--          show-search-->
+<!--          placeholder="Select a person"-->
+<!--          option-filter-prop="children"-->
+<!--          style="width: 150px; padding: 24px 0 24px 0"-->
+<!--          @change="onTagSelectChange"-->
+<!--      >-->
+<!--        <a-select-option v-for="item in this.optionalTags" :key="item" :value="item.name">-->
+<!--          {{ item.name }}-->
+<!--        </a-select-option>-->
+<!--      </a-select>-->
     </a-space>
     <a-list :grid="{ gutter: 24, xs: 1, sm: 2, md: 4, lg: 4, xl: 4, xxl: 4}" :data-source="films">
       <a-list-item slot="renderItem" slot-scope="item" style="padding-bottom: 10px" @click="jumpToFilmDetail(item.id)">
@@ -47,7 +47,7 @@ export default {
     FilmCard
   },
   created() {
-    this.$axios.get(this.$urls.selectFilms + '?pageNum=' + this.pageNum)
+    this.$axios.get(this.$urls.selectFilms + '?pageNum=' + this.pageNum + '&pageSize=8&sortBy=releaseDate&sortType=desc')
         .then((resp) => {
           console.log(resp.data);
           this.totalElements=resp.data.totalElements
@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     onChange(pageNum) {
-      this.$axios.get(this.$urls.selectFilms + '?pageNum=' + pageNum)
+      this.$axios.get(this.$urls.selectFilms + '?pageNum=' + pageNum + '&pageSize=8&sortBy=releaseDate&sortType=desc')
           .then((resp) => {
             console.log(resp.data);
             this.totalElements=resp.data.totalElements
@@ -96,10 +96,6 @@ export default {
           .catch((error) => {
             console.log(error)
           })
-    },
-    onTagSelectChange(tagName) {
-      console.log(tagName)
-      this.selectedTags.push(tagName)
     },
     jumpToFilmDetail(filmId) {
       this.$router.push({path:'/film', query: {filmId: filmId}})

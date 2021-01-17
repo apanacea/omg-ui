@@ -20,8 +20,9 @@
           {{ film.releaseDateStr }}
           <a-divider type="vertical" />
           {{ film.manufacturer.name }}
-          <a-divider type="vertical" />
-          {{ film.series.name }}
+        </p>
+        <p v-if="film.series !== null">
+          系列：{{ film.series.name }}
         </p>
         <!--        <a-list :grid="{ gutter: 16, xs: 2, sm: 4, md: 6, lg: 6, xl: 8, xxl: 8 }" :data-source="film.performers">-->
         <!--          <a-list-item slot="renderItem" slot-scope="item">-->
@@ -91,6 +92,7 @@ export default {
         .then((resp) => {
           console.log(resp.data);
           this.film = resp.data
+          console.log('ceshi')
         })
         .catch((error) => {
           console.log(error)
