@@ -1,16 +1,16 @@
 <template>
   <a-upload
-    name="file"
-    list-type="picture-card"
-    class="avatar-uploader"
-    :show-upload-list="false"
-    :action="this.$urls.uploadPerformerAvatar"
-    :before-upload="beforeUpload"
-    @change="handleChange"
+      name="file"
+      list-type="picture-card"
+      class="avatar-uploader"
+      :show-upload-list="false"
+      :action="this.$urls.uploadPerformerAvatar"
+      :before-upload="beforeUpload"
+      @change="handleChange"
   >
-    <img v-if="imageUrl" :src="imageUrl" alt="avatar" style="width: 200px; height: 200px"/>
+    <img v-if="avatarUrl" :src="avatarUrl" alt="avatar" style="width: 102px; height: 102px"/>
     <div v-else>
-      <a-icon :type="loading ? 'loading' : 'plus'" />
+      <a-icon :type="loading ? 'loading' : 'plus'"/>
       <div class="ant-upload-text">
         Upload
       </div>
@@ -23,12 +23,15 @@ function getBase64(img, callback) {
   reader.addEventListener('load', () => callback(reader.result));
   reader.readAsDataURL(img);
 }
+
 export default {
-    name: 'PerformerAvatarUpload',
+  name: 'PerformerAvatarUpload',
+  props: {
+    avatarUrl: null
+  },
   data() {
     return {
       loading: false,
-      imageUrl: ''
     };
   },
   methods: {
@@ -38,10 +41,10 @@ export default {
         return;
       }
       if (info.file.status === 'done') {
-          this.$emit('handleAvatarSrc', info.file.response.avatarSrc)
+        this.$emit('handleAvatarSrc', info.file.response.avatarUrl)
         // Get this url from response in real world.
-        getBase64(info.file.originFileObj, imageUrl => {
-          this.imageUrl = imageUrl;
+        getBase64(info.file.originFileObj, avatarUrl => {
+          this.avatarUrl = avatarUrl;
           this.loading = false;
         });
       }
@@ -65,6 +68,7 @@ export default {
   width: 128px;
   height: 128px;
 }
+
 .ant-upload-select-picture-card i {
   font-size: 32px;
   color: #999;

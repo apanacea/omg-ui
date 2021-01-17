@@ -6,10 +6,15 @@
         sub-title="添加或修改已有的演员信息"
     />
     <PerformerDrawer style="padding-bottom: 24px; padding-top: 24px"/>
-    <a-table bordered :data-source="performers" :columns="columns" :pagination="false" style="padding-bottom: 24px">
+    <PerformerUpdateDrawer :visible="updatePerformerVisible" :performer="updatePerformer"/>
+    <a-table
+        bordered
+        :data-source="performers"
+        :columns="columns"
+        style="padding-bottom: 24px">
       <template slot="operation" slot-scope="text, record">
         <a-space>
-          <PerformerDrawer/>
+          <a-button @click="onUpdatePerformer(record)"> 编辑 </a-button>
           <a-popconfirm
               v-if="performers.length"
               title="确定要删除吗?"
@@ -24,24 +29,25 @@
 
       </template>
     </a-table>
-    <a-pagination show-quick-jumper :pageSize="20" :default-current="pageNum" :total="totalElements" @change="onChange"/>
   </div>
 </template>
 
 <script>
 import PerformerDrawer from './PerformerDrawer.vue'
+import PerformerUpdateDrawer from "@/components/manage/performer/PerformerUpdateDrawer";
 
 export default {
   name: 'PerformerManagePage',
   components: {
-    PerformerDrawer
+    PerformerDrawer,
+    PerformerUpdateDrawer
   },
   created() {
-    this.$axios.get(this.$urls.selectPerformers)
+    this.$axios.get(this.$urls.selectAllPerformers)
         .then((resp) => {
           console.log(resp.data);
-          this.performers = resp.data.list
-          this.totalElements = resp.data.totalElements
+          this.performers = resp.data
+          // this.totalElements = resp.data.totalElements
         })
         .catch((error) => {
           console.log(error)
@@ -49,43 +55,42 @@ export default {
   },
   data() {
     return {
+      updatePerformer: {},
+      updatePerformerVisible: false,
       performers: [],
-      pageNum: 1,
-      totalElements: 0,
+      // pageNum: 1,
+      // totalElements: 0,
       columns: [
+        {
+          title: '名字',
+          dataIndex: 'name',
+          width: '15%',
+          //   scopedSlots: { customRender: 'name' },
+        },
         {
           title: '中文名',
           dataIndex: 'nameZh',
-          //   width: '30%',
-          //   scopedSlots: { customRender: 'name' },
-        },
-        {
-          title: '日文名',
-          dataIndex: 'nameJa',
-          //   width: '30%',
-          //   scopedSlots: { customRender: 'name' },
-        },
-        {
-          title: '英文名',
-          dataIndex: 'nameEn',
-          //   width: '30%',
+          width: '15%',
           //   scopedSlots: { customRender: 'name' },
         },
         {
           title: '评级',
           dataIndex: 'level',
+          width: '5%',
+        },
+        {
+          title: '作品数量',
+          dataIndex: 'filmCount',
+          width: '5%',
         },
         {
           title: '头像链接',
           dataIndex: 'avatarSrc',
         },
         {
-          title: '标签',
-          dataIndex: 'tag',
-        },
-        {
           title: '操作',
           dataIndex: 'operation',
+          width: '15%',
           scopedSlots: {customRender: 'operation'},
         },
       ],
@@ -124,6 +129,11 @@ export default {
             console.log(error)
           })
     },
+    // eslint-disable-next-line vue/no-dupe-keys
+    onUpdatePerformer(performer) {
+      this.updatePerformer = performer
+      this.updatePerformerVisible = true
+    }
   },
 };
 </script>

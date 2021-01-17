@@ -12,7 +12,10 @@
       </a-button>
     </div>
 <!--    <PerformerDrawer style="padding-bottom: 24px; padding-top: 24px"/>-->
-    <a-table bordered :data-source="dataSource" :columns="columns">
+    <a-table
+        bordered
+        :data-source="dataSource"
+        :columns="columns">
       <template slot="operation" slot-scope="text, record">
         <a-space>
 <!--          <PerformerDrawer/>-->
@@ -97,8 +100,6 @@ export default {
     flashTable() {
       this.$axios.get(this.$urls.selectTags)
           .then((resp) => {
-            console.log('刷新页面');
-            console.log(resp.data);
             this.dataSource = resp.data
           })
           .catch((error) => {

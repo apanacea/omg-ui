@@ -7,8 +7,11 @@ export default {
 
     // 查询演员列表
     selectPerformers: baseUrl + '/performers',
+    selectAllPerformers: baseUrl + '/allPerformers',
+    selectPerformer: baseUrl + '/performer/',
     // 添加演员
     createPerformer: baseUrl + '/performer',
+    updatePerformer: baseUrl + '/performer',
     // 删除演员
     deletePerformer: baseUrl + '/performer/',
 

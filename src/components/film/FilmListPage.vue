@@ -81,7 +81,7 @@ export default {
       this.selectedTags.push(tagName)
     },
     jumpToFilmDetail(filmId) {
-      this.$router.push('/film/' + filmId)
+      this.$router.push({path:'/film', query: {filmId: filmId}})
     }
   }
 };

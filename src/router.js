@@ -8,15 +8,19 @@ Vue.use(VueRouter)
 import FilmDetailPage from "@/components/film/FilmDetailPage";
 import FilmList from './components/film/FilmListPage.vue';
 import PerformerList from './components/performer/PerformerList.vue';
+import PerformerDetail from "@/components/performer/PerformerDetail";
 import HelloWorld from './components/HelloWorld.vue';
 import PerformerManagePage from './components/manage/performer/PerformerManagePage'
 import TagManagePage from "@/components/manage/tag/TagManagePage";
+
 //定义routes路由的集合，数组类型
 const routes=[
     //单个路由均为对象类型，path代表的是路径，component代表组件
-    {path:'',redirect:'films'},
-    {path:'/film/:filmId',component:FilmDetailPage},
+    {path:'/',redirect:'films'},
+    {path:'/film',component:FilmDetailPage},
+    // {path:'/film/:filmId',component:FilmDetailPage},
     {path:'/films',component:FilmList},
+    {path:'/performer',component:PerformerDetail},
     {path:'/performers',component:PerformerList},
 
     {path:'/performerManage',component:PerformerManagePage},

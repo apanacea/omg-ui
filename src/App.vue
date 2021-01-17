@@ -29,7 +29,7 @@
         </a-sub-menu>
       </a-menu>
     </a-layout-header>
-    <a-layout-content style="padding: 50px">
+    <a-layout-content style="padding: 24px">
       <div :style="{ background: '#fff', padding: '24px', minHeight: '280px' }">
         <router-view></router-view>
       </div>

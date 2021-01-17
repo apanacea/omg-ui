@@ -6,12 +6,12 @@
         sub-title=""
     />
     <TagSelect style="padding: 24px 0 24px 0"/>
-    <a-list :grid="{ gutter: 24, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 8 }" :data-source="performers">
-      <a-list-item slot="renderItem" slot-scope="item">
-        <PerformerCard :name="item.name" :avatarUrl="item.avatarUrl"/>
+    <a-list :grid="{ gutter: 24, xs: 2, sm: 4, md: 6, lg: 6, xl: 8, xxl: 8 }" :data-source="performers">
+      <a-list-item slot="renderItem" slot-scope="item" @click="jumpToPerformerDetail(item.id)">
+        <PerformerCard :name="item.nameZh !== null ? item.nameZh : item.name" :avatarUrl="item.avatarUrl"/>
       </a-list-item>
     </a-list>
-    <a-pagination show-quick-jumper pageSize="20" :default-current="pageNum" :total="totalElements" @change="onChange"/>
+    <a-pagination show-quick-jumper :pageSize="32" :default-current="pageNum" :total="totalElements" @change="onChange"/>
   </div>
 
 </template>
@@ -26,7 +26,7 @@ export default {
     PerformerCard
   },
   created() {
-    this.$axios.get(this.$urls.selectPerformers)
+    this.$axios.get(this.$urls.selectPerformers + '?pageNum=1&pageSize=32')
         .then((resp) => {
           console.log(resp.data);
           this.performers = resp.data.list
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     onChange(pageNum) {
-      this.$axios.get(this.$urls.selectPerformers + '?pageNum=' + pageNum)
+      this.$axios.get(this.$urls.selectPerformers + '?pageNum=' + pageNum + '&pageSize=32')
           .then((resp) => {
             console.log(resp.data);
             this.performers = resp.data.list
@@ -54,6 +54,9 @@ export default {
           .catch((error) => {
             console.log(error)
           })
+    },
+    jumpToPerformerDetail(performerId) {
+      this.$router.push({path:'/performer', query: {performerId: performerId}})
     }
   }
 };
