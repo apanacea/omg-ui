@@ -10,6 +10,17 @@
           show-search
           placeholder="Select a person"
           option-filter-prop="children"
+          style="width: 250px; padding: 24px 0 24px 0"
+          @change="onTagSelectChange"
+      >
+        <a-select-option v-for="item in this.optionalSeries" :key="item" :value="item.name">
+          {{ item.name }}
+        </a-select-option>
+      </a-select>
+      <a-select
+          show-search
+          placeholder="Select a person"
+          option-filter-prop="children"
           style="width: 150px; padding: 24px 0 24px 0"
           @change="onTagSelectChange"
       >
@@ -23,7 +34,7 @@
           <FilmCard :id="item.id" :title="item.title" :serialNumber="item.serialNumber" :coverUrl="item.coverUrl"/>
       </a-list-item>
     </a-list>
-    <a-pagination simple pageSize="8" :default-current="pageNum" :total="totalElements" @change="onChange"/>
+    <a-pagination pageSize="8" :default-current="pageNum" :total="totalElements" @change="onChange"/>
   </div>
 
 </template>
@@ -45,7 +56,15 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-    this.$axios.get(this.$urls.selectTags + '?tagType=film')
+    this.$axios.get(this.$urls.selectAllSeries)
+        .then((resp) => {
+          console.log(resp.data);
+          this.optionalSeries = resp.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    this.$axios.get(this.$urls.selectTags)
         .then((resp) => {
           console.log(resp.data);
           this.optionalTags = resp.data
@@ -61,7 +80,9 @@ export default {
       pageNum: 1,
       totalElements: 1,
       optionalTags: [],
-      selectedTag: null
+      selectedTag: null,
+      optionalSeries: [],
+      selectedSeriesId: null
     };
   },
   methods: {

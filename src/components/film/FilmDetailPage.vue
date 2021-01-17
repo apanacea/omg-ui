@@ -14,7 +14,15 @@
       <a-col :span="14">
         <h1 style="margin: 0"> {{ film.serialNumber }} </h1>
 <!--        <h3> {{ film.serialNumber }} </h3>-->
-        <p style="margin: 0; padding-bottom: 32px"> 120 分钟 ｜ {{ film.releaseDate }} | {{ film.manufacturer.name }} </p>
+        <p style="margin: 0; padding-bottom: 32px">
+          120 分钟
+          <a-divider type="vertical" />
+          {{ film.releaseDateStr }}
+          <a-divider type="vertical" />
+          {{ film.manufacturer.name }}
+          <a-divider type="vertical" />
+          {{ film.series.name }}
+        </p>
         <!--        <a-list :grid="{ gutter: 16, xs: 2, sm: 4, md: 6, lg: 6, xl: 8, xxl: 8 }" :data-source="film.performers">-->
         <!--          <a-list-item slot="renderItem" slot-scope="item">-->
         <!--            <PerformerAvatar :performer="item"/>-->
@@ -36,6 +44,16 @@
       </a-list-item>
     </a-list>
     <div style="height: 24px; background: #F0F2F5; margin: 0 -24px 0 -24px"/>
+    <h1 style="padding: 24px 0 24px 0">磁力搜索</h1>
+    <a-space style="padding-bottom: 24px">
+      <a :href="'http://clg0.biz/search?word=' + film.serialNumber" target="_blank">
+        <a-button>磁力狗</a-button>
+      </a>
+      <a :href="'https://0cili.com/search?q=' + film.serialNumber" target="_blank">
+        <a-button>无极磁链</a-button>
+      </a>
+    </a-space>
+    <div style="height: 24px; background: #F0F2F5; margin: 0 -24px 0 -24px; padding-top: 24px"/>
     <h1 style="padding: 24px 0 24px 0">影片图集</h1>
     <ScreenshotCard
         v-for="screenshot in film.screenshots"

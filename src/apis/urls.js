@@ -1,5 +1,5 @@
-// const baseUrl = 'http://localhost:8080'
-const baseUrl = 'http://62.234.10.88/api'
+const baseUrl = 'http://localhost:8080'
+// const baseUrl = 'http://62.234.10.88/api'
 
 export default {
     // 图片列表
@@ -25,6 +25,9 @@ export default {
     createTag: baseUrl + '/tag',
     // 删除演员
     deleteTag: baseUrl + '/tag/',
+
+    selectSeries: baseUrl + '/series/',
+    selectAllSeries: baseUrl + '/allSeries',
 
     uploadPerformerAvatar: baseUrl + '/upload/performerAvatar',
 }

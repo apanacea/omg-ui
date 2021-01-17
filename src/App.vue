@@ -14,6 +14,9 @@
         <a-menu-item key="2" @click="onSelect('performers')">
           演员
         </a-menu-item>
+        <a-menu-item key="3" @click="onSelect('series')">
+          系列
+        </a-menu-item>
         <a-sub-menu>
         <span slot="title" class="submenu-title-wrapper">
           <a-icon type="setting"/> 后台管理 </span>
