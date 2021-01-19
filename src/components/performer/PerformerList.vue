@@ -5,7 +5,12 @@
         title="演员列表"
         sub-title=""
     />
-    <TagSelect style="padding: 24px 0 24px 0"/>
+    <a-input-search
+        style="width: 200px; padding: 24px 0 24px 0"
+        placeholder="根据名字查询"
+        enter-button
+        @search="onSearch"
+    />
     <a-list :grid="{ gutter: 24, xs: 2, sm: 4, md: 6, lg: 6, xl: 8, xxl: 8 }" :data-source="performers">
       <a-list-item slot="renderItem" slot-scope="item" @click="jumpToPerformerDetail(item.id)">
         <PerformerCard :name="item.nameZh !== null ? item.nameZh : item.name" :avatarUrl="item.avatarUrl"/>
@@ -17,12 +22,10 @@
 </template>
 <script>
 import PerformerCard from './PerformerCard.vue';
-import TagSelect from '../TagSelect.vue';
 
 export default {
   name: 'PerformerList',
   components: {
-    TagSelect,
     PerformerCard
   },
   created() {
@@ -57,6 +60,18 @@ export default {
     },
     jumpToPerformerDetail(performerId) {
       this.$router.push({path:'/performer', query: {performerId: performerId}})
+    },
+    onSearch(value) {
+      this.$axios.get(this.$urls.selectPerformers + '?pageNum=1&pageSize=32&name=' + value)
+          .then((resp) => {
+            console.log(resp.data);
+            this.performers = resp.data.list
+            this.pageNum = 1
+            this.totalElements = resp.data.totalElements
+          })
+          .catch((error) => {
+            console.log(error)
+          })
     }
   }
 };
